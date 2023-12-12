@@ -850,7 +850,7 @@ def read_nullable_integer(elem, _reader):
 def read_nullable_boolean(elem, _reader):
     if "mask" in elem:
         return pd.arrays.BooleanArray(
-            _reader.read_elem(elem["values"]), mask=_reader.read_elem(elem["mask"])
+            np.array(_reader.read_elem(elem["values"]), type=bool), mask=np.array(_reader.read_elem(elem["mask"]), type=bool)
         )
     else:
         return pd.array(_reader.read_elem(elem["values"]))
